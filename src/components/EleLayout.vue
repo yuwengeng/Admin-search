@@ -65,7 +65,7 @@ import Dialog from './Dialog.vue'
 import type { ElTable } from 'element-plus'
 
 import {save, initData} from '../api/server.js'
-import { data } from '../assets/search.json'
+// import { data } from '../assets/search.json'
 
 const isCollapse = ref(false)
 const activeTag = ref('all')
