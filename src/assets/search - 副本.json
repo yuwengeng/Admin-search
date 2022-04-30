@@ -1,0 +1,269 @@
+{
+    "data": [
+        {
+            "title": "百度",
+            "url": "https://www.baidu.com/s?wd=${query} -广告 -推广",
+            "type": "all"
+        },
+        {
+            "title": "spot",
+            "url": "https://spot.ecloud.global/search?q=${query}",
+            "type": "all"
+        },
+        {
+            "title": "Searx",
+            "url": "https://wiby.org/?q=${query}",
+            "type": "all"
+        },
+        {
+            "title": "Google2",
+            "url": "https://www.sanzhima.com/search?q=${query}",
+            "type": "all"
+        },
+        {
+            "title": "DuckDuckGo",
+            "url": "https://duckduckgo.com/?q=${query}&t=hd&va=u&ia=web",
+            "type": "all"
+        },
+        {
+            "title": "Yandex",
+            "url": "https://yandex.com/search/?text=${query}",
+            "type": "all"
+        },
+        {
+            "title": "搜狗",
+            "url": "https://www.sogou.com/web?query=${query}",
+            "type": "all"
+        },
+        {
+            "title": "必应",
+            "url": "http://cn.bing.com/search?q=${query}",
+            "type": "all"
+        },
+        {
+            "title": "花瓣",
+            "url": "https://huaban.com/search/?q=${query}",
+            "type": "life"
+        },
+        {
+            "title": "微信",
+            "url": "http://weixin.sogou.com/weixin?type=2&s_from=input&query=${query}&ie=utf8&_sug_=n&_sug_type_=",
+            "type": "all"
+        },
+        {
+            "title": "知乎",
+            "url": "https://www.zhihu.com/search?q=${query}",
+            "type": "all"
+        },
+        {
+            "title": "豆瓣",
+            "url": "https://www.douban.com/search?q=${query}",
+            "type": "all"
+        },
+        {
+            "title": "贴吧",
+            "url": "http://zhannei.baidu.com/cse/site?q=${query}&click=1&cc=tieba.baidu.com&s=&nsid=",
+            "type": "all"
+        },
+        {
+            "title": "wiki百科",
+            "url": "https://wikicn.ywg.workers.dev/w/index.php?search=${query}",
+            "type": "all"
+        },
+        {
+            "title": "搜云",
+            "url": "https://www.wosouyun.com/wd/${query}",
+            "type": "pans"
+        },
+        {
+            "title": "天天搜",
+            "url": "http://www.daysou.com/s?q=${query}&start=0&isget=1&tp=all&cl=0&line=3",
+            "type": "pans"
+        },
+        {
+            "title": "58wp",
+            "url": "https://m.58wangpan.com/so?order=feed_time&feed_time=0&keyword=${query}",
+            "type": "pans"
+        },
+        {
+            "title": "fastsoso",
+            "url": "https://www.fastsoso.cn/search?k=${query}&s=1&t=-1",
+            "type": "pans"
+        },
+        {
+            "title": "酷搜",
+            "url": "https://www.kolsou.com/search?q=${query}",
+            "type": "pans"
+        },
+        {
+            "title": "B站搜",
+            "url": "https://search.bilibili.com/all?keyword=${query}",
+            "type": "pans"
+        },
+        {
+            "title": "热榜搜",
+            "url": "https://tophub.today/search?q=${query}",
+            "type": "pans"
+        },
+        {
+            "title": "慕课网",
+            "url": "https://www.imooc.com/search/wiki?words=${query}",
+            "type": "jike"
+        },
+        {
+            "title": "博客园",
+            "url": "https://zzk.cnblogs.com/s/blogpost?Keywords=${query}&DateTimeRange=OneYear",
+            "type": "jike"
+        },
+        {
+            "title": "博客聚合",
+            "url": "https://q.krytro.com/search?q=${query}",
+            "type": "jike"
+        },
+        {
+            "title": "语雀",
+            "url": "https://www.yuque.com/search?scope=&p=1&q=${query}&type=content",
+            "type": "jike"
+        },
+        {
+            "title": "书签搜索",
+            "url": "https://www.bookmarkearth.com/s/search?q=${query}",
+            "type": "jike"
+        },
+        {
+            "title": "极客时间",
+            "url": "https://time.geekbang.org/search?q=${query}",
+            "type": "jike"
+        },
+        {
+            "title": "极客搜索",
+            "url": "https://s.geekbang.org/search/c=0/k=${query}/t=",
+            "type": "jike"
+        },
+        {
+            "title": "百度kaifa",
+            "url": "https://kaifa.baidu.com/searchPage?wd=${query}",
+            "type": "jike"
+        },
+        {
+            "title": "开发者头条",
+            "url": "https://toutiao.io/search?q=${query}",
+            "type": "jike"
+        },
+        {
+            "title": "阿里云",
+            "url": "https://developer.aliyun.com/search?q=${query}",
+            "type": "jike"
+        },
+        {
+            "title": "腾讯云",
+            "url": "https://cloud.tencent.com/developer/search/article-${query}",
+            "type": "jike"
+        },
+        {
+            "title": "Github",
+            "url": "https://github.com/search?q=${query}",
+            "type": "jike"
+        },
+        {
+            "title": "Gitee",
+            "url": "https://search.gitee.com/?skin=rec&type=blog&q=${query}",
+            "type": "jike"
+        },
+        {
+            "title": "react组件",
+            "url": "https://react.parts/?search=${query}",
+            "type": "jike"
+        },
+        {
+            "title": "鱼塘搜",
+            "url": "https://mo.fish/main/search/${query}",
+            "type": "jike"
+        },
+        {
+            "title": "V2",
+            "url": "https://google.ywg.workers.dev/search?q=site:v2ex.com/t ${query}",
+            "type": "jike"
+        },
+        {
+            "title": "神马",
+            "url": "https://yz.m.sm.cn/s?q=${query}",
+            "type": "life"
+        },
+        {
+            "title": "头条",
+            "url": "https://so.toutiao.com/search?dvpf=pc&source=input&keyword=${query}",
+            "type": "all"
+        },
+        {
+            "title": "无追搜索",
+            "url": "https://www.wuzhuiso.com/s?ie=utf-8&fr=none&src=360sou_newhome&q=${query}",
+            "type": "all"
+        },
+        {
+            "title": "微博",
+            "url": "http://s.weibo.com/weibo/${query}",
+            "type": "life"
+        },
+        {
+            "title": "京东",
+            "url": "http://search.jd.com/Search?enc=utf-8&keyword=${query}",
+            "type": "life"
+        },
+        {
+            "title": "值得买",
+            "url": "https://search.smzdm.com/?c=home&s=${query}&v=b",
+            "type": "life"
+        },
+        {
+            "title": "磁力猫",
+            "url": "http://clm0.org/search?word=${query}",
+            "type": "bt"
+        },
+        {
+            "title": "字幕库",
+            "url": "http://www.zimuku.la/search?q=${query}",
+            "type": "bt"
+        },
+        {
+            "title": "index视频",
+            "url": "https://www.google.com/search?q=intext:${query} (avi|mkv|mov|mp4|mpg|wmv) -inurl:(jsp|pl|php|html|aspx|htm|cf|shtml) intitle:index.of./",
+            "type": "index"
+        },
+        {
+            "title": "indexeBook",
+            "url": "https://www.google.com/search?q=intext:${query} (CBZ|CBR|CHM|DOC|DOCX|EPUB|MOBI|ODT|PDF|RTF|txt) -inurl:(jsp|pl|php|html|aspx|htm|cf|shtml) intitle:index.of./",
+            "type": "index"
+        },
+        {
+            "title": "index压缩包",
+            "url": "https://www.google.com/search?q=intext:${query} -inurl:(jsp|pl|php|html|aspx|htm|cf|shtml) intitle:index.of./",
+            "type": "index"
+        },
+        {
+            "title": "搜软",
+            "url": "https://www.lanzou8.com/s/${query}",
+            "type": "index"
+        },
+        {
+            "title": "应用宝",
+            "url": "https://sj.qq.com/myapp/search.htm?kw=${query}",
+            "type": "index"
+        },
+        {
+            "title": "酷安app",
+            "url": "https://www.google.com/search?newwindow=1&ei=jwyhX-HPDsGbmAXmkJvgBQ&q=site:coolapk.com ${query}",
+            "type": "index"
+        },
+        {
+            "title": "近邻词",
+            "url": "https://tool.mingdawoo.com/lang/nearby_word/search?ds=31&q=${query}",
+            "type": "ai"
+        },
+        {
+            "title": "Magi",
+            "url": "https://magi.com/search?q=${query}",
+            "type": "ai"
+        }
+    ]
+}
