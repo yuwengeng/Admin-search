@@ -37,7 +37,8 @@
       <Dialog :visible=visible @updateDialog='updateDialog' @updateData="updateData" :form="selectedData"></Dialog>
       <el-main>
         <el-scrollbar>
-          <el-table fit :data="tableData" height="82vh" style="width: 100%" v-on:row-dblclick="changeItem"
+          <el-table fit :data="tableData" height="82vh" v-bind:style="{width: '100%',background: `url(${img1})`,backgroundPosition: 'center',
+    backgroundSize: 'cover'}" v-on:row-dblclick="changeItem"
             ref="multipleTableRef" @cell-click='deleteItem'>
             <el-table-column type="index" width="50" />
             <el-table-column prop="title" label="名称" width="140" />
@@ -63,6 +64,9 @@ import { computed, unref, watchEffect, toRefs, ref, shallowRef, onBeforeMount } 
 import { Menu as IconMenu, Document, Message, Location, Setting } from '@element-plus/icons-vue'
 import Dialog from './Dialog.vue'
 import type { ElTable } from 'element-plus'
+
+import img1 from '@/assets/api.png'
+
 
 import {save, initData} from '../api/server.js'
 // import { data } from '../assets/search.json'
