@@ -65,11 +65,12 @@ import { Menu as IconMenu, Document, Message, Location, Setting } from '@element
 import Dialog from './Dialog.vue'
 import type { ElTable } from 'element-plus'
 
-import img1 from '@/assets/api.png'
-
+// import img1 from '@/assets/api.png'
 
 import {save, initData} from '../api/server.js'
 // import { data } from '../assets/search.json'
+const img1 = 'https://img.gejiba.com/images/1660145e9a980a0ae03a6f9c88f2933f.png'
+
 
 const isCollapse = ref(false)
 const activeTag = ref('all')
