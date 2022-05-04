@@ -31,14 +31,15 @@
             </template>
           </el-dropdown>
           <span>设置</span>
+          <span style="display: inline-block;margin: 0 10px;"> | </span>
           <el-button @click="()=>save(reactiveData)">保存</el-button>
         </div>
       </el-header>
       <Dialog :visible=visible @updateDialog='updateDialog' @updateData="updateData" :form="selectedData"></Dialog>
-      <el-main>
+      <el-main v-bind:style="{width: '100%',background: `url(${img1})`,backgroundPosition: 'center',
+    backgroundSize: 'cover'}">
         <el-scrollbar>
-          <el-table fit :data="tableData" height="82vh" v-bind:style="{width: '100%',background: `url(${img1})`,backgroundPosition: 'center',
-    backgroundSize: 'cover'}" v-on:row-dblclick="changeItem"
+          <el-table fit :data="tableData" height="80vh" v-on:row-dblclick="changeItem"
             ref="multipleTableRef" @cell-click='deleteItem'>
             <el-table-column type="index" width="50" />
             <el-table-column prop="title" label="名称" width="140" />
@@ -51,6 +52,7 @@
               </el-popconfirm>
             </el-table-column>
           </el-table>
+          <hr>
           <el-button type="primary" @click="addItem">增加</el-button>
         </el-scrollbar>
       </el-main>
@@ -64,6 +66,7 @@ import { computed, unref, watchEffect, toRefs, ref, shallowRef, onBeforeMount } 
 import { Menu as IconMenu, Document, Message, Location, Setting } from '@element-plus/icons-vue'
 import Dialog from './Dialog.vue'
 import type { ElTable } from 'element-plus'
+import { StorageSerializers, useStorage } from '@vueuse/core'
 
 // import img1 from '@/assets/api.png'
 
@@ -74,9 +77,10 @@ const img1 = 'https://img.gejiba.com/images/1660145e9a980a0ae03a6f9c88f2933f.png
 
 const isCollapse = ref(false)
 const activeTag = ref('all')
-const reactiveData = shallowRef([]);   //只在组件内操作
-
+// const reactiveData = shallowRef([]);   //只在组件内操作
+const reactiveData = useStorage('key', [], undefined, { serializer: StorageSerializers.object })
 onBeforeMount(async() => {
+  if(reactiveData) return
   const d = await initData();
   // console.log(d.data,data)
   return reactiveData.value = d.data;

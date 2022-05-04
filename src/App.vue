@@ -6,7 +6,6 @@ import EleLayout from './components/EleLayout.vue'
 </script>
 
 <template>
-  <!-- <HelloWorld msg="Hello Vue 3 + Vite" /> -->
   <EleLayout></EleLayout>
 </template>
 
