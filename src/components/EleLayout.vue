@@ -52,8 +52,7 @@
               </el-popconfirm>
             </el-table-column>
           </el-table>
-          <hr>
-          <el-button type="primary" @click="addItem">增加</el-button>
+          <el-button type="primary" @click="addItem" style="display: inline-block; margin-top: 6px;">增加</el-button>
         </el-scrollbar>
       </el-main>
     </el-container>
@@ -80,7 +79,7 @@ const activeTag = ref('all')
 // const reactiveData = shallowRef([]);   //只在组件内操作
 const reactiveData = useStorage('key', [], undefined, { serializer: StorageSerializers.object })
 onBeforeMount(async() => {
-  if(reactiveData) return
+  if(reactiveData.value.length) return
   const d = await initData();
   // console.log(d.data,data)
   return reactiveData.value = d.data;
@@ -205,5 +204,11 @@ const tabs = computed(() => {
   justify-content: center;
   height: 100%;
   right: 20px;
+}
+.el-table{
+  --el-table-bg-color: unset;
+}
+.el-table tr {
+    background: unset !important;
 }
 </style>
