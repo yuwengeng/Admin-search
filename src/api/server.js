@@ -60,7 +60,7 @@ export async function save(store){
   });
   fetch(hookapi, {
     method: 'POST',
-    headers: {  Accept: "application/vnd.github.everest-preview+json",Authorization: "token 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"  },
+    headers: {  Accept: "application/vnd.github.everest-preview+json",Authorization: "token ${{TRIGGER_EVENT}}"  },
     body: JSON.stringify({"event_type": "webhook-1"}),
   });
   // const res_1 = await res.json();
