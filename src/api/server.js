@@ -47,6 +47,9 @@ export class Server {
 }
 
 export async function save(store){
+  const owner = 'yuwengeng';
+  const repo = 'search-sites';
+  const hookapi = `https://api.github.com/repos/${owner}/${repo}/dispatches`;
   const res = await fetch(envconfig.baseURL + '/put', {
     method: 'POST',
     headers: {  'Content-Type': 'application/json'  },
@@ -55,8 +58,13 @@ export async function save(store){
     }),
     mode: 'no-cors',
   });
-  const res_1 = await res.json();
-  return console.log('res', res_1);
+  fetch(hookapi, {
+    method: 'POST',
+    headers: {  Accept: "application/vnd.github.everest-preview+json",Authorization: "token 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"  },
+    body: JSON.stringify({"event_type": "webhook-1"}),
+  });
+  // const res_1 = await res.json();
+  // return console.log('res', res_1);
 }
 // new Response({}, {headers: {'Content-Type': 'application/json','Access-Control-Allow-Origin': '*'}})}});
 // new URLSearchParams(
