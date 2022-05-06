@@ -1,5 +1,6 @@
 import axios from 'axios';
 import envconfig from '@/envconfig/envconfig';
+
 /**
  * 主要params参数
  * @params method {string} 方法名
@@ -45,7 +46,7 @@ export class Server {
     })
   }
 }
-
+console.log(process.env.TRIGGER_EVENT)
 export async function save(store){
   const owner = 'yuwengeng';
   const repo = 'search-sites';
@@ -58,16 +59,37 @@ export async function save(store){
     }),
     mode: 'no-cors',
   });
-  fetch(hookapi, {
-    method: 'POST',
-    headers: {  Accept: "application/vnd.github.everest-preview+json",Authorization: "token ${{process.env.TRIGGER_EVENT}}"},
-    body: JSON.stringify({"event_type": "webhook-1"}),
-  });
-  // const res_1 = await res.json();
+  try {
+    fetch(hookapi, {
+      method: 'POST',
+      headers: {  "Accept": "application/vnd.github.everest-preview+json","Authorization": `token ${process.env.TRIGGER_EVENT}`},
+      "Content-Type": "application/json",
+      body: JSON.stringify({"event_type": "webhook-1"}),
+    });
+  } catch (error) {
+    console.log('Request Failed', error);
+  }
+
+  // const res_1 = await res.json();${process.env.TRIGGER_EVENT}
   // return console.log('res', res_1);
 }
+
+// curl -H "Accept: application/vnd.github.everest-preview+json" \
+//     -H "Authorization: token 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" \
+//     --request POST \
+//     --data '{"event_type": "webhook-1"}' \
+//     https://api.github.com/repos/yuwengeng/search-sites/dispatches
+
+// 如果你想检查 GitHub action 是否触发，你可以通过下面的命令来检查。
+
+// curl -H "Accept: application/vnd.github.everest-preview+json" \
+//     -H "Authorization: token <your personal access token>" \
+//   --request GET   \
+//   --data '{"event_type": "do-something"}' \
+//   https://api.github.com/repos/<username>/<repo>/actions/runs
+
 // new Response({}, {headers: {'Content-Type': 'application/json','Access-Control-Allow-Origin': '*'}})}});
-// new URLSearchParams(
+
 export async function initData(){
   const res = await axios.get(envconfig.baseURL + '/get?key=searchData');
   console.log('res', typeof res.data);
