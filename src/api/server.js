@@ -74,11 +74,7 @@ export async function save(store){
   // return console.log('res', res_1);
 }
 
-// curl -H "Accept: application/vnd.github.everest-preview+json" \
-//     -H "Authorization: token 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" \
-//     --request POST \
-//     --data '{"event_type": "webhook-1"}' \
-//     https://api.github.com/repos/yuwengeng/search-sites/dispatches
+
 
 // 如果你想检查 GitHub action 是否触发，你可以通过下面的命令来检查。
 
