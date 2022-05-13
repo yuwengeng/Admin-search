@@ -1,7 +1,6 @@
 <template>
-
   <el-container class="layout-container-demo" style="height: 95%">
-    <el-aside width="200px">
+    <el-aside width="20%">
       <el-scrollbar>
         <el-menu v-for="(tab, i) in tabs" :default-active="activeTag" class="el-menu-vertical-demo"
           :collapse="isCollapse">
@@ -18,32 +17,19 @@
     <el-container>
       <el-header style="text-align: right; font-size: 12px">
         <div class="toolbar">
-          <el-dropdown>
-            <el-icon style="margin-right: 8px; margin-top: 1px">
-              <setting />
-            </el-icon>
-            <template #dropdown>
-              <el-dropdown-menu>
-                <el-dropdown-item>View</el-dropdown-item>
-                <el-dropdown-item>Add</el-dropdown-item>
-                <el-dropdown-item>Delete</el-dropdown-item>
-              </el-dropdown-menu>
-            </template>
-          </el-dropdown>
-          <span>设置</span>
-          <span style="display: inline-block;margin: 0 10px;"> | </span>
-          <el-button @click="()=>save(reactiveData)">保存</el-button>
+          <el-button @click="() => saveSitesData(reactiveData)">保存</el-button>
         </div>
       </el-header>
       <Dialog :visible=visible @updateDialog='updateDialog' @updateData="updateData" :form="selectedData"></Dialog>
-      <el-main v-bind:style="{width: '100%',background: `url(${img1})`,backgroundPosition: 'center',
-    backgroundSize: 'cover'}">
+      <el-main>
         <el-scrollbar>
-          <el-table fit :data="tableData" height="80vh" v-on:row-dblclick="changeItem"
-            ref="multipleTableRef" @cell-click='deleteItem'>
+          <el-table fit :data="tableData" height="80vh" v-on:row-dblclick="changeItem" ref="multipleTableRef"
+            @cell-click='deleteItem'>
             <el-table-column type="index" width="50" />
             <el-table-column prop="title" label="名称" width="140" />
-            <el-table-column prop="url" label="链接" width="420" />
+            <el-table-column prop="href" label="链接" />
+            <el-table-column prop="slogan" label="描述" />
+            <el-table-column prop="star" label="收藏" width="60" />
             <el-table-column fixed="right" label="操作" width="120">
               <el-popconfirm title="Are you sure to delete this?" @confirm="confirmEvent">
                 <template #reference>
@@ -61,58 +47,63 @@
             
 
 <script lang="ts" setup>
-import { computed, unref, watchEffect, toRefs, ref, shallowRef, onBeforeMount } from 'vue'
-import { Menu as IconMenu, Document, Message, Location, Setting } from '@element-plus/icons-vue'
+import { computed, ref, onBeforeMount } from 'vue'
+import { Menu as IconMenu, } from '@element-plus/icons-vue'
 import Dialog from './Dialog.vue'
 import type { ElTable } from 'element-plus'
-import { StorageSerializers, useStorage } from '@vueuse/core'
-
-// import img1 from '@/assets/api.png'
-
-import {save, initData} from '../api/server.js'
-// import { data } from '../assets/search.json'
-const img1 = 'https://img.gejiba.com/images/1660145e9a980a0ae03a6f9c88f2933f.png'
+import { useSessionStorage } from '@vueuse/core'
 
 
-const isCollapse = ref(false)
-const activeTag = ref('all')
-// const reactiveData = shallowRef([]);   //只在组件内操作
-const reactiveData = useStorage('key', [], undefined, { serializer: StorageSerializers.object })
-onBeforeMount(async() => {
-  if(reactiveData.value.length) return
-  const d = await initData();
-  // console.log(d.data,data)
-  return reactiveData.value = d.data;
-})
+import { saveSitesData, initSitesData } from '../api/server.js'
+// import data from '../assets/sites.json'
 
-let selectedData = ref<{
+
+export interface IPropData {
   title?: string,
-  url?: string,
-  type: string
-}>({
+  href?: string,
+  kind_name: string,
+  slogan?: string,
+  star?: "star" | null,
+}
+const isCollapse = ref(false)
+const activeTag = ref('娱乐')
+// const reactiveData = ref<IPropData[]>([]);   
+const reactiveData = useSessionStorage<IPropData[]>('sitesData', [])
+onBeforeMount(async () => {
+  if (reactiveData.value.length) return
+  const d = await initSitesData();
+  return reactiveData.value = d.data as IPropData[];
+})
+// console.log(reactiveData.value);
+
+let selectedData = ref<IPropData>({
   title: '',
-  url: '',
-  type: ''
+  href: '',
+  kind_name: '',
+  slogan: '',
+  star: null
 });
 
-const visible = ref<string | boolean>(false)
+let visible = ref<string | boolean>(false)
 let cacheItem = null;
 
 const multipleTableRef = ref<InstanceType<typeof ElTable>>()
 
+// hide Dialog
 const updateDialog = (val: string | boolean) => {
   visible.value = val
 }
 const updateData = (val, type: string) => {
   switch (type) {
     case 'addItem':
+      // console.log('val', val);
       reactiveData.value.splice(0, 0, val)
       break;
     case 'changeItem':
       if (Object.keys(cacheItem).length) {
         const older = [...reactiveData.value];
         let _ = older.map((i) => {
-          if (i.url == cacheItem.url) {
+          if (i.href == cacheItem.href) {
             i = val;
           }
           return i
@@ -127,11 +118,10 @@ const updateData = (val, type: string) => {
 
 const handleOpen = (key: { index: string; }) => {
   activeTag.value = key.index;
-  // console.log(key.target.innerText, typeof key)
 }
 const addItem = () => {
   // const old = tableData.value;
-  selectedData.value = { type: activeTag.value }
+  selectedData.value = { kind_name: activeTag.value }
   updateDialog('addItem')
 
 }
@@ -155,7 +145,7 @@ const changeItem = (e: any) => {
 
 let tableData = computed(() => {
   return reactiveData.value.filter((item) => {
-    return item.type == activeTag.value;
+    return item.kind_name == activeTag.value;
   })
 })
 // watch(activeTag, () => {
@@ -167,14 +157,12 @@ let tableData = computed(() => {
 const tabs = computed(() => {
   const map = new Map;
   reactiveData.value.forEach((item, index) => {
-    if (!map.has(item.type)) {
-      map.set(item.type, index)
+    if (!map.has(item.kind_name)) {
+      map.set(item.kind_name, index)
     }
   })
   return Array.from(map)
 });
-
-
 </script>
 
 <style scoped>
@@ -204,11 +192,5 @@ const tabs = computed(() => {
   justify-content: center;
   height: 100%;
   right: 20px;
-}
-.el-table{
-  --el-table-bg-color: unset;
-}
-.el-table tr {
-    background: unset !important;
 }
 </style>

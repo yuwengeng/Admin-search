@@ -6,16 +6,10 @@
         <el-input v-model="form.title" autocomplete="off" />
       </el-form-item>
       <el-form-item label="URL" :label-width="formLabelWidth">
-        <el-input v-model="form.href" autocomplete="off" />
+        <el-input v-model="form.url" autocomplete="off" />
       </el-form-item>
       <el-form-item label="Tag" :label-width="formLabelWidth">
-        <el-input v-model="form.kind_name" autocomplete="off" />
-      </el-form-item>
-      <el-form-item label="slogan" :label-width="formLabelWidth">
-        <el-input v-model="form.slogan" autocomplete="off" />
-      </el-form-item>
-      <el-form-item label="star" :label-width="formLabelWidth">
-        <el-input v-model="form.star" autocomplete="off" />
+        <el-input v-model="form.type" autocomplete="off" />
       </el-form-item>
     </el-form>
     <template #footer>
@@ -28,11 +22,10 @@
 </template>
 
 <script lang="ts" setup>
-import { IPropData } from './SiteManage.vue'
 
 const props = defineProps<{
   visible: boolean | string,
-  form: IPropData
+  form: { title?: string; url?: string; type: string; }
 }>()
 let emits = defineEmits(['updateDialog', 'updateData'])
 

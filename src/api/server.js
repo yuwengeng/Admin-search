@@ -46,19 +46,22 @@ export class Server {
     })
   }
 }
-console.log(process.env.TRIGGER_EVENT)
 export async function save(store){
   const owner = 'yuwengeng';
   const repo = 'search-sites';
   const hookapi = `https://api.github.com/repos/${owner}/${repo}/dispatches`;
-  const res = await fetch(envconfig.baseURL + '/put', {
-    method: 'POST',
-    headers: {  'Content-Type': 'application/json'  },
-    body: JSON.stringify({
-      "data":store
-    }),
-    mode: 'no-cors',
-  });
+  try {
+    await fetch(envconfig.baseURL + '/put', {
+      method: 'POST',
+      headers: {  'Content-Type': 'application/json'  },
+      body: JSON.stringify({
+        "data":store
+      }),
+      mode: 'no-cors',
+    });
+  } catch (error) {
+    console.log('put Failed', error);
+  }
   try {
     fetch(hookapi, {
       method: 'POST',
@@ -88,7 +91,7 @@ export async function save(store){
 
 export async function initData(){
   const res = await axios.get(envconfig.baseURL + '/get?key=searchData');
-  console.log('res', typeof res.data);
+  // console.log('res', typeof res.data);
   return res.data;
   // fetch(envconfig.baseURL + '/get?key=searchData', {
   //   method: 'GET',
@@ -103,4 +106,23 @@ export async function initData(){
   // console.log('res', res_1);
   // return {data:res.data}
   
+}
+export async function initSitesData(){
+  const res = await axios.get(envconfig.baseURL + '/get?key=sitesData');
+  return res.data;
+}
+
+export async function saveSitesData(store){
+  try {
+    await fetch(envconfig.baseURL + '/put?key=sitesData', {
+      method: 'POST',
+      headers: {  'Content-Type': 'application/json'  },
+      body: JSON.stringify({
+        "data":store
+      }),
+      mode: 'no-cors',
+    });
+  } catch (error) {
+    console.log('sitesData put Failed', error);
+  }
 }
